@@ -1,7 +1,5 @@
 # Monetary Futarchy
 
-**WARNING**: *nobody has verified that any these thoughts hold any merit; they are just dumb ideas until someone with more clout chooses to give them relevance :P*
-
 Polkadot does not have a predefined issuance schedule by design. Once the network launches and achieves relative stability, it will be necessary to communicate clear expectations for the future issuance schedule to stakeholders. This module uses a designated committee to relay clear expectations of future changes akin to Central Bank [forward guidance](https://www.federalreserve.gov/faqs/what-is-forward-guidance-how-is-it-used-in-the-federal-reserve-monetary-policy.htm).
 
 ## Understanding the Polkadot Treasury
@@ -16,7 +14,7 @@ At the network's launch, the treasury will generously dilute rewards. For every 
 
 **The purpose of this project is to raise awareness of the treasury's governance and it's significant influence on ecosystem development**. The treasury is fed by Polkadot's dilution mechanism. In practice, this mechanism extracts a silent tax on liquid DOTs; this tax is redistributed to the treasury and validators/nominators in the form of minted rewards. This is an example of the [Cantillon Effect](https://www.aier.org/article/sound-money-project/cantillon-effects-and-money-neutrality) in which the first to receive new funds benefit disproportionately. 
 
-If this isn't immediately clear, consider the following example. I issue five beads and back all of the beads by $10. So you might reason that each bead is worth $2 (*assuming there was a market*). If I issue five more beads, but don't increase the amount that backs the beads, you would reason that each bead is worth $1. This is basically how inflation works, but it doesn't happen all at once. It happens slowly over time because prices adjust slowly over time. So the first to spend the new funds are spending in a market that is, figuratively, treating each bead as if it is worth $2. Eventually, prices adjust and somewhere down the line, each bead is worth $1.
+> If this isn't immediately clear, consider the following example. I issue five beads and back all of the beads by $10. So you might reason that each bead is worth $2 (*assuming there was a market*). If I issue five more beads, but don't increase the amount that backs the beads, you would reason that each bead is worth $1. This is basically how inflation works, but it doesn't happen all at once. It happens slowly over time because prices adjust slowly over time. So the first to spend the new funds are spending in a market that is treating each bead as if it is worth $2. Eventually, prices adjust and somewhere down the line, each bead is worth $1.
 
 So, the takeaway is that issuance redistributes wealth `=>` DOT holders really need to pay attention to the structure of Polkadot's monetary policy. Moreover, the initial issuance schedule, which conservatively dilutes significant DOTs into the treasury, should not be enforced indefinitely. **([1](#futarchy)) How will changes be made to this issuance schedule and what kind of mechanisms are in place to prevent (or expensively price) radical changes?**
 
@@ -28,13 +26,13 @@ So, basically I want to introduce a council tasked with
 1. forward guidance on issuance and spending decisions
 2. fund management of the treasury
 
-Different stakeholders have different perceptions of the DOT token's purpose. VCs might prefer less dilution to the treasury in a low price scenario, while Parity presumably would prioritize chain security to short-term token valuation. Without clear consensus on the token's purpose, conflicts of interest are bound to arise `=>`Polkadot needs council to govern monetary policy. This follows from the fact that the ecosystem contains a diverse set of stakeholders with strong opposing opinions on token purpose.
+Different stakeholders have different perceptions of the DOT token's purpose. VCs might prefer less dilution to the treasury in a low price scenario, while Parity presumably would prioritize chain security to short-term token valuation. Without clear consensus on the token's purpose, conflicts of interest are bound to arise `=>`Polkadot needsa monetary council to govern monetary policy. This follows from the fact that the ecosystem contains a diverse set of stakeholders with strong opposing opinions on token purpose.
 
 The monetary council will represent Polkadot's stakeholders with domain-specific experts selected by DOT holders via Phragmen's algorithm (like all other councils). This council should significantly bias low voter turnout, with the expectations that DOT holders will probably delegate most decisions to the domain-specific experts on the council. 
 
 The process for pitching an investment will also be open to the public. To prevent proposal spam, I am thinking it might be appropriate to require significantly more collateral from normal (not-on-council) DOT holders for council-relevant proposals. Members of the council can cheaply propose changes that are voted on, while normal DOT holders must either gain the sponsorship of a council member OR crowdfund collateral from other DOT holders to trigger a referendum. This ensures most proposals that are voted on are from council members, but it also provides a path for disgruntled DOT holders to instigate change without the support of the council. In other words, it prevents DOT holders from being pushed out of governance, but still delegates responsibility in the optimistic setting to the council.
 
-If the council was hypothetically "*captured*" and attempted to vote maliciously, the DOT holders could easily reject the proposal in the referendum. If the *captured council* refused to act in the face of some market calamity, the DOT holders can still crowdfund a proposal above the required threshold to trigger a referendum in which case a high DOT turnout would still guarantee passage. This is a nice balance of power that facilitates delegation of opinion in optimistic scenarios without sacrificing future governance power.
+If the council was hypothetically *captured* and attempted to vote maliciously, the DOT holders could easily reject the proposal in the referendum. If the *captured council* refused to act in the face of some market calamity, the DOT holders can still crowdfund a proposal above the required threshold to trigger a referendum in which case a high DOT turnout would still guarantee passage. This is a nice balance of power that facilitates delegation of opinion in optimistic scenarios without sacrificing future governance power.
 
 ## Monetary Futarchy <a name = "futarchy"></a>
 > This is heavily inspired by [forward guidance](https://www.bloomberg.com/quicktake/forward-guidance) -- similarly, it does not need to be binding.
@@ -51,9 +49,9 @@ If we wanted to take things a step further, it would be possible to set the coll
 
 ## Treasury Fund Management <a name = "treasury"></a>
 
-**The treasury should hold a balance sheet with assets that are varying degrees of liquidity (defined in terms of DOT tokens)**. At the network's launch, almost all of the treasury's assets should be in DOTs and this should be the case for a while, but eventually the treasury could diversify into less liquid assets. This could even include lending DOTs to stakeholders or even donating to some projects. It could also involve burning DOTs if the network's stakeholders decide they want to take back some of the silent tax that was extracted from the liquid supply.
+**The treasury should hold assets with varying degrees of liquidity (liquid to DOT tokens)**. At the network's launch, almost all of the treasury's assets should be in DOTs and this should be the case for a while, but eventually the treasury could diversify into less liquid assets. This could even include lending DOTs to stakeholders or even donating to some projects. It could also involve burning DOTs, if the network's stakeholders decide they want to take back some of the silent tax that was extracted from the liquid supply.
 
-I wouldn't be all that surprised if the money supply system started to look a lot like the existing monetary system. The relay chain's treasury offers low rates to parachains which offer slightly higher interest rates to apps/users. The treasury could adjust rates to constrain/liberate liquidity based on the ecosystem's economic conditions.
+I wouldn't be all that surprised if the system started to look a lot like the existing monetary system. The relay chain's treasury offers low rates to parachains which offer slightly higher interest rates to apps/users. The treasury could adjust rates to constrain/liberate liquidity based on the ecosystem's economic conditions.
 
 ### staking derivatives will add complexity
 
