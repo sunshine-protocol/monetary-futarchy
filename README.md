@@ -12,7 +12,7 @@ So, the treasury exists to provide some control over the **`locked : liquid`** r
 
 At the network's launch, the treasury will generously dilute rewards. For every block author reward, four times that amount is sent to the treasury. Eventually, this kind of aggressive dilution won't be necessary. *Who will determine when that is and how will it be coordinated and enforced through governance?*
 
-**The purpose of this project is to raise awareness of the treasury's governance and it's significant influence on ecosystem development**. The treasury is fed by Polkadot's dilution mechanism. In practice, this mechanism extracts a silent tax on liquid DOTs; this tax is redistributed to the treasury and validators/nominators in the form of minted rewards. This is an example of the [Cantillon Effect](https://www.aier.org/article/sound-money-project/cantillon-effects-and-money-neutrality) in which the first to receive new funds benefit disproportionately. 
+**The purpose of this project is to raise awareness of the treasury's governance and its significant influence on ecosystem development**. The treasury is fed by Polkadot's dilution mechanism. In practice, this mechanism extracts a silent tax on liquid DOTs; this tax is redistributed to the treasury and validators/nominators in the form of minted rewards. This is an example of the [Cantillon Effect](https://www.aier.org/article/sound-money-project/cantillon-effects-and-money-neutrality) in which the first to receive new funds benefit disproportionately. 
 
 > If this isn't immediately clear, consider the following example. I issue five beads and back all of the beads by $10. So you might reason that each bead is worth $2 (*assuming there was a market*). If I issue five more beads, but don't increase the amount that backs the beads, you would reason that each bead is worth $1. This is basically how inflation works, but it doesn't happen all at once. It happens slowly over time because prices adjust slowly over time. So the first to spend the new funds are spending in a market that is treating each bead as if it is worth $2. Eventually, prices adjust and somewhere down the line, each bead is worth $1.
 
@@ -26,7 +26,7 @@ So, basically I want to introduce a council tasked with
 1. forward guidance on issuance and spending decisions
 2. fund management of the treasury
 
-Different stakeholders have different perceptions of the DOT token's purpose. VCs might prefer less dilution to the treasury in a low price scenario, while Parity presumably would prioritize chain security to short-term token valuation. Without clear consensus on the token's purpose, conflicts of interest are bound to arise `=>`Polkadot needsa monetary council to govern monetary policy. This follows from the fact that the ecosystem contains a diverse set of stakeholders with strong opposing opinions on token purpose.
+Different stakeholders have different perceptions of the DOT token's purpose. VCs might prefer less dilution to the treasury in a low price scenario, while Parity presumably would prioritize chain security to short-term token valuation. Without clear consensus on the token's purpose, conflicts of interest are bound to arise `=>`Polkadot needs a monetary council to govern monetary policy. This follows from the fact that the ecosystem contains a diverse set of stakeholders with strong opposing opinions on token purpose.
 
 The monetary council will represent Polkadot's stakeholders with domain-specific experts selected by DOT holders via Phragmen's algorithm (like all other councils). This council should significantly bias low voter turnout, with the expectations that DOT holders will probably delegate most decisions to the domain-specific experts on the council. 
 
@@ -49,7 +49,7 @@ If we wanted to take things a step further, it would be possible to set the coll
 
 ## Treasury Fund Management <a name = "treasury"></a>
 
-**The treasury should hold assets with varying degrees of liquidity (liquid to DOT tokens)**. At the network's launch, almost all of the treasury's assets should be in DOTs and this should be the case for a while, but eventually the treasury could diversify into less liquid assets. This could even include lending DOTs to stakeholders or even donating to some projects. It could also involve burning DOTs, if the network's stakeholders decide they want to take back some of the silent tax that was extracted from the liquid supply.
+**The treasury should hold assets with varying degrees of liquidity (liquid to DOT tokens)**. At the network's launch, almost all of the treasury's assets should be in DOTs and this should be the case for a while, but eventually the treasury could diversify into less liquid assets. This could even include lending DOTs to stakeholders or even donating to some projects. It could also involve burning DOTs if the network's stakeholders decide they want to take back some of the silent tax that was extracted from the liquid supply.
 
 I wouldn't be all that surprised if the system started to look a lot like the existing monetary system. The relay chain's treasury offers low rates to parachains which offer slightly higher interest rates to apps/users. The treasury could adjust rates to constrain/liberate liquidity based on the ecosystem's economic conditions.
 
