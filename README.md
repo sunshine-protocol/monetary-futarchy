@@ -1,6 +1,6 @@
 # Monetary Futarchy
 
-Polkadot does not have a predefined issuance schedule by design. Once the network launches and achieves relative stability, it will be necessary to communicate clear expectations for the future issuance schedule to stakeholders. This module uses a designated committee to relay clear expectations of future changes akin to Central Bank [forward guidance](https://www.federalreserve.gov/faqs/what-is-forward-guidance-how-is-it-used-in-the-federal-reserve-monetary-policy.htm).
+Polkadot does not have a predefined issuance schedule by design. Once the network launches and achieves relative stability, it will be necessary to communicate clear expectations for the future issuance schedule to stakeholders. This module uses a designated committee to relay expectations of future changes akin to Central Bank [forward guidance](https://www.federalreserve.gov/faqs/what-is-forward-guidance-how-is-it-used-in-the-federal-reserve-monetary-policy.htm).
 
 ## Understanding the Polkadot Treasury
 
@@ -55,4 +55,4 @@ I wouldn't be all that surprised if the system started to look a lot like the ex
 
 ### staking derivatives will add complexity
 
-Another thing to consider is the liquidity of the funds staked by validators. If the funds are indefinitely locked up, they'll probably be used in a derivatives market soon enough. There will probably also be validator insurance markets. All of these markets will be open to all DOT holders, thereby adding complexity to an already very complicated system. Side (*synthetic*) bets subsidize the underlying, but also increase the systemic risk of the system.
+Another thing to consider is the liquidity of the funds staked by validators. If the funds are indefinitely locked up, they'll probably be used in a derivatives market soon enough. There will probably also be validator insurance markets. All of these markets will be open to all DOT holders, thereby adding complexity to an already very complicated system. Side (*synthetic*) bets subsidize the underlying, but also increase systemic risk.
