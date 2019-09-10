@@ -1,4 +1,6 @@
 # no executables
+target/
+Cargo.lock
 **/target/
 **/*/target/
 **/*/*/target/
