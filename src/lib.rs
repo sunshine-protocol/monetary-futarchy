@@ -1,8 +1,5 @@
 //! Monetary Futarchy
 //! - at the moment, just continuous projections of expected spending among council members
-//! - use phragmen (support::ChangeMembers) for council selection
-//! - experiment with pricing relevant proposals according to stdev from projections
-//! - would prefer to use offchain workers for graphing projections in DOT plot and calculating proposal collateral
 #![cfg_attr(not(feature = "std"), no_std)]
 #![recursion_limit = "128"]
 use parity_scale_codec::{Decode, Encode};
@@ -14,18 +11,32 @@ use support::{
 };
 use system::ensure_signed;
 
-
 type BalanceOf<T> = <<T as Trait>::Currency as Currency<<T as system::Trait>::AccountId>>::Balance;
+type DotPoints = Vec<(BalanceOf, BlockNumber>; // invariant: length == `TotalTerm`s
 
-// Projection submitted by member
-#[derive(Encode, Decode, Clone, Eq, PartialEq, Ord, PartialOrd)]
+// temporary structure for encoding changes to spending parameterizations
+// TODO: add Guillame's fixed issuance curve and make it adjustable
+#[derive(Encode, Decode, Clone, Eq)]
 #[cfg_attr(feature = "std", derive(Debug))]
-pub struct Projection<Balance, BlockNumber> {
-    // spending estimate
-    spending_estimate: Balance,
-    // block number
-    time: BlockNumber,
-} // TODO: make it more like a schedule instead of one estimate for one period
+pub struct Projection<DotPoints> {
+    // projections for total reward 
+    total_reward: DotPoints,
+    // dilution to treasury on block author reward
+    treasury_dilute_on_block_author:  DotPoints,
+    // block author reward
+    block_author_reward: DotPoints,
+    // dilution to treasury on relay chain validator reward
+    treasury_dilute_on_relay_reward: DotPoints,
+    // relay chain validator reward
+    validator_relay_reward: DotPoints,
+    // dilution to treasury on parachain rewards
+    treasury_dilute_on_parachain_reward: DotPoints,
+    // parachain rewards (eventually to be highest)
+    validator_parachain_rewards: DotPoints,
+}
+
+// instead of hard coding this use number of variants of projection (this is WORST practices)
+const total_projection_fields: usize = 7;
 
 pub trait Trait: system::Trait {
     // overarching event type
@@ -34,8 +45,11 @@ pub trait Trait: system::Trait {
     /// The balances type
     type Currency: Currency<Self::AccountId> + ReservableCurrency<Self::AccountId>;
 
-    // how frequently proposals are passed from the dispatchQ
-    type ProjectionPeriod: Get<Self::BlockNumber>;
+    // how long each projection lasts
+    type TermDuration: Get<Self::BlockNumber>;
+
+    // how many terms in a projection
+    type TotalTerms: Get<u32>;
 }
 
 decl_event!(
@@ -70,8 +84,8 @@ decl_module! {
         // frequency with which projections are made
         const ProjectionPeriod: T::BlockNumber = T::ProjectionPeriod::get();
 
-        // permissionless to make initial testing straightforward 
-        // TODO: use phragmen instead (see https://github.com/paritytech/substrate/pull/3364 -- support::ChangeMembers)
+        // permissionless to make testing straightforward 
+        // TODO: use phragmenn in practice instead (see https://github.com/paritytech/substrate/pull/3364 -- support::ChangeMembers)
         fn join_council(origin) -> Result {
             let new_member = ensure_signed(origin)?;
             ensure!(!Self::is_on_council(&new_member), "is already a member");
@@ -80,14 +94,15 @@ decl_module! {
             Ok(())
         }
 
-        fn submit_dot_point(origin, spending_estimate: BalanceOf<T>) -> Result {
+        fn submit_dot_point(origin, projections: Vec<Projection>) -> Result {
             let council_member = ensure_signed(origin)?;
             ensure!(Self::is_on_council(&council_member), "not on the council");
 
-            // even if the projection already exists, there is no cost to change votes (so less bribery encouragement)
-            // so we just overwrite the previous projections (can add more nuanced rep later...)
-            let time = <system::Module<T>>::block_number();
-            <CurrentProjections<T>>::insert(council_member, Projection { spending_estimate, time });
+            ensure!(projections.len() == total_projection_fields, "doesn't match the current projection format");
+            let _ = projections.into_iter().for_each(|dp| {
+                // build the Projection struct with some builder pattern here
+                // emit a single event with that outrageous struct
+            });
             Ok(())
         }
 

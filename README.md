@@ -2,6 +2,8 @@
 
 Polkadot does not have a predefined issuance schedule by design. Once the network launches and achieves relative stability, it will be necessary to communicate clear expectations for the future issuance schedule to stakeholders. This module uses a designated committee to relay expectations of future changes akin to Central Bank [forward guidance](https://www.federalreserve.gov/faqs/what-is-forward-guidance-how-is-it-used-in-the-federal-reserve-monetary-policy.htm).
 
+> **NOTE**: whenever I talk about *dilution* to the Treasury, just replace "`dilution`" with "`silent tax on liquid DOTs`", redistributed to the powers that control the treasury (ie the benevolence or corruptness of the treasury's governance). If that governance is opaque and centralized, then we just created a digital version of the existing, broken monetary governance systems.
+
 ## Understanding the Polkadot Treasury
 
 The original purpose of the [treasury](https://www.federalreserve.gov/faqs/what-is-forward-guidance-how-is-it-used-in-the-federal-reserve-monetary-policy.htm) is to keep the proportion of tokens staked constant while minting liquid validator rewards. **Why?** The proportion of liquid supply determines how cheap/easy it is to overcome the BFT threshold (1/3) and attack the blockchain...I don't really buy the argument that it aligns the token value with network security (see PoW) **How?** [`OnDilution`](https://github.com/paritytech/substrate/blob/master/srml/treasury/src/lib.rs#L339) runtime hook "mints extra funds for the treasury to keep the ratio of `tokens_staked` to `total_issuance` equal pre-dilution and post-dilution".
@@ -43,15 +45,59 @@ The monetary policy council might present a DOT plot which predicts inflation (d
 
 At first, there does not need to be any consequence to these projections. They are a way of relaying expectations in a transparent way. If nothing else, this exercise encourages relative stability by psychologically anchoring future decisions to these projections.
 
+### Projection Schema
+
+There are basically a few different ways that funds are diluted to the treasury at Polkadot's initial launch:
+1. 80% of the block reward goes to the treasury and 20% to the block author
+2. 100% of validator rewards are matched and sent to the treasury
+3. some % of parachain rewards might be matched as dilution to the treasury
+
+For context on (3), parachain validation rewards will initially be set to 0 in the absence of parachains but they will eventually encompass 90% of validator rewards.
+
+The exact parameterizations aren't set in stone, but these three dilution streams form the basis for the `Projection` struct defined in the (current) runtime for tracking projections and how projections change over time. Governance of these parameters needs to be more explicit, but the current design over-optimizes for readability for demonstration purposes (see expected architecture detailed further blow). 
+
+```rust
+type DotPoint: Vec<(BalanceOf, BlockNumber)>;
+
+#[derive(Encode, Decode, Clone, Eq)]
+#[cfg_attr(feature = "std", derive(Debug))]
+pub struct Projection<DotPoints> {
+    // projections for total reward 
+    total_reward: DotPoints,
+    // dilution to treasury on block author reward
+    treasury_dilute_on_block_author:  DotPoints,
+    // block author reward
+    block_author_reward: DotPoints,
+    // dilution to treasury on relay chain validator reward
+    treasury_dilute_on_relay_reward: DotPoints,
+    // relay chain validator reward
+    validator_relay_reward: DotPoints,
+    // dilution to treasury on parachain rewards
+    treasury_dilute_on_parachain_reward: DotPoints,
+    // parachain rewards (eventually to be highest)
+    validator_parachain_rewards: DotPoints,
+}
+```
+
+#### <a href="">Actual Expected Runtime Storage of Projections</a>
+
 ### Radical Change should be Expensive
 
 If we wanted to take things a step further, it would be possible to set the collateral requirement for monetary governance proposals in proportion to the difference between the proposal and the council's projections (might be measured via standard deviation). More specifically, radical proposals that veer from the current council projection path require significantly more collateral than proposals that only slightly tweak the existing schedule. 
 
 ## Treasury Fund Management <a name = "treasury"></a>
 
-**The treasury should hold assets with varying degrees of liquidity (liquid to DOT tokens)**. At the network's launch, almost all of the treasury's assets should be in DOTs and this should be the case for a while, but eventually the treasury could diversify into less liquid assets. This could even include lending DOTs to stakeholders or even donating to some projects. It could also involve burning DOTs if the network's stakeholders decide they want to take back some of the silent tax that was extracted from the liquid supply.
+**The treasury should hold assets with varying degrees of liquidity (liquid to DOT tokens)**. At the network's launch, almost all of the treasury's assets should be in DOTs and this should be the case for a while, but eventually the treasury could diversify into less liquid assets. [Probably not publicly traded assets, but maybe early-stage private investments in the ecosystem](./RISK.md#conclusion).
 
-I wouldn't be all that surprised if the system started to look a lot like the existing monetary system. The relay chain's treasury offers low rates to parachains which offer slightly higher interest rates to apps/users. The treasury could adjust rates to constrain/liberate liquidity based on the ecosystem's economic conditions.
+This could also involve burning DOTs if the network's stakeholders decide they want to take back some of the silent tax that was extracted from the liquid supply.
+
+Lending is probably the most obvious option aside from hodling or burning DOTs. I wouldn't be all that surprised if the system started to look a lot like the existing monetary system. The relay chain's treasury offers low rates to parachains which offer slightly higher interest rates to apps/users. The treasury could adjust rates to constrain/liberate liquidity of DOTs based on the ecosystem's economic conditions. 
+
+### Who/what will be "Too Big To Fail" next time?
+
+In the event of a near market collapse (think Great Recession-esque), the treasury might *in best faith* rescue core infrastructure ie para{chains, threads} deemed "critical". Maybe we are bound to repeat our mistakes `=>` captured governance protects special interests, labeling those that took the most risk and have the least to lose as "Too Big To Fail". 
+
+It's our job to ensure that the governance of this ecosystem is robust against misuse. Our hope is that better designed governance mechanisms will effectively prioritize stakeholder interests when resources are scarce for catching a falling knife.
 
 ### staking derivatives will add complexity
 
