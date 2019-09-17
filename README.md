@@ -79,7 +79,7 @@ pub struct Projection<DotPoints> {
 }
 ```
 
-#### <a href="">Actual Expected Runtime Storage of Projections</a>
+#### <a href="https://github.com/web3garden/monetary-futarchy/issues/1">Actual Expected Runtime Storage of Projections</a>
 
 ### Radical Change should be Expensive
 
