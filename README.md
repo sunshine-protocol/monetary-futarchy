@@ -2,7 +2,7 @@
 
 Polkadot does not have a predefined issuance schedule by design. Once the network launches and achieves relative stability, it will be necessary to communicate clear expectations for the future issuance schedule to stakeholders. This module uses a designated committee to relay expectations of future changes akin to Central Bank [forward guidance](https://www.federalreserve.gov/faqs/what-is-forward-guidance-how-is-it-used-in-the-federal-reserve-monetary-policy.htm).
 
-> **NOTE**: whenever I talk about *dilution* to the Treasury, just replace "`dilution`" with "`silent tax on liquid DOTs`", redistributed to the powers that control the treasury (ie the benevolence or corruptness of the treasury's governance). If that governance is opaque and centralized, then we just created a digital version of the existing, broken monetary governance systems.
+*[This proposal was explained in detail at DOTcon in August 2019](https://youtu.be/ROA0u1-PrhA?t=1577)*
 
 ## Understanding the Polkadot Treasury
 
